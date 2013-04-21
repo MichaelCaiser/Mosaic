@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E64BB8BA1724770E0076675B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64BB8B91724770E0076675B /* UIKit.framework */; };
+		E64BB8BC1724770E0076675B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64BB8BB1724770E0076675B /* Foundation.framework */; };
+		E64BB8BE1724770E0076675B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64BB8BD1724770E0076675B /* CoreGraphics.framework */; };
+		E64BB8C41724770F0076675B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E64BB8C21724770F0076675B /* InfoPlist.strings */; };
+		E64BB8C61724770F0076675B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8C51724770F0076675B /* main.m */; };
+		E64BB8CA1724770F0076675B /* MAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8C91724770F0076675B /* MAppDelegate.m */; };
+		E64BB8CC1724770F0076675B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E64BB8CB1724770F0076675B /* Default.png */; };
+		E64BB8CE1724770F0076675B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64BB8CD1724770F0076675B /* Default@2x.png */; };
+		E64BB8D01724770F0076675B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64BB8CF1724770F0076675B /* Default-568h@2x.png */; };
+		E64BB8D31724770F0076675B /* MViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8D21724770F0076675B /* MViewController.m */; };
+		E64BB8D61724770F0076675B /* MViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E64BB8D41724770F0076675B /* MViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E64BB8B61724770E0076675B /* Mosaic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mosaic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E64BB8B91724770E0076675B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E64BB8BB1724770E0076675B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E64BB8BD1724770E0076675B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E64BB8C11724770F0076675B /* Mosaic-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mosaic-Info.plist"; sourceTree = "<group>"; };
+		E64BB8C31724770F0076675B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E64BB8C51724770F0076675B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E64BB8C71724770F0076675B /* Mosaic-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mosaic-Prefix.pch"; sourceTree = "<group>"; };
+		E64BB8C81724770F0076675B /* MAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAppDelegate.h; sourceTree = "<group>"; };
+		E64BB8C91724770F0076675B /* MAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAppDelegate.m; sourceTree = "<group>"; };
+		E64BB8CB1724770F0076675B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		E64BB8CD1724770F0076675B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		E64BB8CF1724770F0076675B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E64BB8D11724770F0076675B /* MViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MViewController.h; sourceTree = "<group>"; };
+		E64BB8D21724770F0076675B /* MViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MViewController.m; sourceTree = "<group>"; };
+		E64BB8D51724770F0076675B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E64BB8B31724770E0076675B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E64BB8BA1724770E0076675B /* UIKit.framework in Frameworks */,
+				E64BB8BC1724770E0076675B /* Foundation.framework in Frameworks */,
+				E64BB8BE1724770E0076675B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E64BB8AD1724770E0076675B = {
+			isa = PBXGroup;
+			children = (
+				E64BB8BF1724770E0076675B /* Mosaic */,
+				E64BB8B81724770E0076675B /* Frameworks */,
+				E64BB8B71724770E0076675B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E64BB8B71724770E0076675B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E64BB8B61724770E0076675B /* Mosaic.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E64BB8B81724770E0076675B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E64BB8B91724770E0076675B /* UIKit.framework */,
+				E64BB8BB1724770E0076675B /* Foundation.framework */,
+				E64BB8BD1724770E0076675B /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E64BB8BF1724770E0076675B /* Mosaic */ = {
+			isa = PBXGroup;
+			children = (
+				E64BB8C81724770F0076675B /* MAppDelegate.h */,
+				E64BB8C91724770F0076675B /* MAppDelegate.m */,
+				E64BB8D11724770F0076675B /* MViewController.h */,
+				E64BB8D21724770F0076675B /* MViewController.m */,
+				E64BB8D41724770F0076675B /* MViewController.xib */,
+				E64BB8C01724770F0076675B /* Supporting Files */,
+			);
+			path = Mosaic;
+			sourceTree = "<group>";
+		};
+		E64BB8C01724770F0076675B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E64BB8C11724770F0076675B /* Mosaic-Info.plist */,
+				E64BB8C21724770F0076675B /* InfoPlist.strings */,
+				E64BB8C51724770F0076675B /* main.m */,
+				E64BB8C71724770F0076675B /* Mosaic-Prefix.pch */,
+				E64BB8CB1724770F0076675B /* Default.png */,
+				E64BB8CD1724770F0076675B /* Default@2x.png */,
+				E64BB8CF1724770F0076675B /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E64BB8B51724770E0076675B /* Mosaic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E64BB8D91724770F0076675B /* Build configuration list for PBXNativeTarget "Mosaic" */;
+			buildPhases = (
+				E64BB8B21724770E0076675B /* Sources */,
+				E64BB8B31724770E0076675B /* Frameworks */,
+				E64BB8B41724770E0076675B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mosaic;
+			productName = Mosaic;
+			productReference = E64BB8B61724770E0076675B /* Mosaic.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E64BB8AE1724770E0076675B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = M;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Stacks on Stacks";
+			};
+			buildConfigurationList = E64BB8B11724770E0076675B /* Build configuration list for PBXProject "Mosaic" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E64BB8AD1724770E0076675B;
+			productRefGroup = E64BB8B71724770E0076675B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E64BB8B51724770E0076675B /* Mosaic */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E64BB8B41724770E0076675B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E64BB8C41724770F0076675B /* InfoPlist.strings in Resources */,
+				E64BB8CC1724770F0076675B /* Default.png in Resources */,
+				E64BB8CE1724770F0076675B /* Default@2x.png in Resources */,
+				E64BB8D01724770F0076675B /* Default-568h@2x.png in Resources */,
+				E64BB8D61724770F0076675B /* MViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E64BB8B21724770E0076675B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E64BB8C61724770F0076675B /* main.m in Sources */,
+				E64BB8CA1724770F0076675B /* MAppDelegate.m in Sources */,
+				E64BB8D31724770F0076675B /* MViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E64BB8C21724770F0076675B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E64BB8C31724770F0076675B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E64BB8D41724770F0076675B /* MViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E64BB8D51724770F0076675B /* en */,
+			);
+			name = MViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E64BB8D71724770F0076675B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E64BB8D81724770F0076675B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E64BB8DA1724770F0076675B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mosaic/Mosaic-Prefix.pch";
+				INFOPLIST_FILE = "Mosaic/Mosaic-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E64BB8DB1724770F0076675B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mosaic/Mosaic-Prefix.pch";
+				INFOPLIST_FILE = "Mosaic/Mosaic-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E64BB8B11724770E0076675B /* Build configuration list for PBXProject "Mosaic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E64BB8D71724770F0076675B /* Debug */,
+				E64BB8D81724770F0076675B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E64BB8D91724770F0076675B /* Build configuration list for PBXNativeTarget "Mosaic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E64BB8DA1724770F0076675B /* Debug */,
+				E64BB8DB1724770F0076675B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E64BB8AE1724770E0076675B /* Project object */;
+}
