@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "MImageProvider.h"
 
 @interface MUserImageProvider : NSObject <MImageProvider>

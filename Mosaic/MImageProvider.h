@@ -12,6 +12,6 @@
 @protocol MImageProvider <NSObject>
 
 @required
-- (NSArray *)imagesForRegion:(MKCoordinateRegion)region;
+- (void)imagesForRegion:(MKCoordinateRegion)region callback:(void (^)(NSArray *images))callback;
 
 @end

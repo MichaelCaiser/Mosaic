@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMosaicView.h"
+#import "MUserImageProvider.h"
+#import "MFlickrImageProvider.h"
 
-@interface MViewController : UIViewController
+@interface MViewController : UIViewController {
+  MMosaicView *_mosaic;
+}
 
 @end

@@ -12,6 +12,8 @@
   NSMutableArray *_imageViews;
 }
 
+- (id)initWithImages:(NSArray *)images;
+
 @property(nonatomic,strong)NSArray *images;
 
 @end

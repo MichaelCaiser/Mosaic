@@ -10,4 +10,14 @@
 
 @implementation MUserImageProvider
 
+- (void)imagesForRegion:(MKCoordinateRegion)region callback:(void (^)(NSArray *images))callback; {
+  ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+  [library enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop){
+      NSLog(@"Sup!");
+    }];
+  } failureBlock:nil];
+  callback(@[]);
+}
+
 @end
