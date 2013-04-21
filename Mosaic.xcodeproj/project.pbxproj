@@ -23,6 +23,7 @@
 		E64BB8E517247CA00076675B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64BB8E417247CA00076675B /* MapKit.framework */; };
 		E64BB8E817247CD70076675B /* MUserImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8E717247CD70076675B /* MUserImageProvider.m */; };
 		E64BB8EB17247CE60076675B /* MFlickrImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8EA17247CE60076675B /* MFlickrImageProvider.m */; };
+		E64BB8EE17247E080076675B /* MMosaicView.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8ED17247E080076675B /* MMosaicView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		E64BB8E717247CD70076675B /* MUserImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUserImageProvider.m; sourceTree = "<group>"; };
 		E64BB8E917247CE60076675B /* MFlickrImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFlickrImageProvider.h; sourceTree = "<group>"; };
 		E64BB8EA17247CE60076675B /* MFlickrImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFlickrImageProvider.m; sourceTree = "<group>"; };
+		E64BB8EC17247E080076675B /* MMosaicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMosaicView.h; sourceTree = "<group>"; };
+		E64BB8ED17247E080076675B /* MMosaicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMosaicView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 		E64BB8DF17247C190076675B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E64BB8EC17247E080076675B /* MMosaicView.h */,
+				E64BB8ED17247E080076675B /* MMosaicView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 				E64BB8D31724770F0076675B /* MViewController.m in Sources */,
 				E64BB8E817247CD70076675B /* MUserImageProvider.m in Sources */,
 				E64BB8EB17247CE60076675B /* MFlickrImageProvider.m in Sources */,
+				E64BB8EE17247E080076675B /* MMosaicView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
