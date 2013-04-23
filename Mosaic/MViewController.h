@@ -13,6 +13,7 @@
 
 @interface MViewController : UIViewController {
   MMosaicView *_mosaic;
+  NSArray *_images;
 }
 
 @end

@@ -18,13 +18,10 @@
 {
   [super viewDidLoad];
   [[self view] setFrame:[[UIScreen mainScreen] bounds]];
-  NSArray *images = [self loadImages];
-  _mosaic = [[MMosaicView alloc] initWithImages:images];
-  [_mosaic setFrame:[[self view] bounds]];
-  [[self view] addSubview:_mosaic];
+  [self loadImages];
 }
 
-- (NSArray *)loadImages {
+- (void)loadImages {
   MKCoordinateRegion region = [self regionForCoordinate:CLLocationCoordinate2DMake(10, 10)];
   NSArray *providers = @[
                          [[MUserImageProvider alloc] init]
@@ -32,28 +29,35 @@
                          ];
   NSMutableArray *providerFinished = [NSMutableArray arrayWithCapacity:[providers count]];
   for (NSUInteger i = 0 ; i < [providers count] ; i++) {
-    [providerFinished addObject:[NSNumber numberWithBool:NO]];
+    [providerFinished addObject:@NO];
   }
   NSMutableArray *totalImages = [NSMutableArray arrayWithCapacity:30];
   for (NSUInteger i = 0 ; i < [providers count] ; i++) {
     NSObject<MImageProvider> *provider = [providers objectAtIndex:i];
     [provider imagesForRegion:region callback:^(NSArray *images) {
       [totalImages addObjectsFromArray:images];
-      [providerFinished replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:YES]];
+      [providerFinished replaceObjectAtIndex:i withObject:@YES];
+      if ([self allProvidersFinished:providerFinished]) {
+        _images = totalImages;
+        [self createMosaic];
+      }
     }];
   }
-  BOOL waiting = YES;
-  while (waiting) {
-    // Check if we are actually waiting
-    BOOL allDone = YES;
-    for (NSNumber *flag in providerFinished) {
-      allDone = allDone && [flag boolValue];
-    }
-    if (allDone) {
-      waiting = NO;
-    }
+}
+
+- (void)createMosaic {
+  NSLog(@"Images: %@",_images);
+  _mosaic = [[MMosaicView alloc] initWithImages:_images];
+  [_mosaic setFrame:[[self view] bounds]];
+  [[self view] addSubview:_mosaic];
+}
+
+- (BOOL)allProvidersFinished:(NSArray *)providerFinished {
+  BOOL allDone = YES;
+  for (NSNumber *finished in providerFinished) {
+    allDone = allDone & [finished boolValue];
   }
-  return totalImages;
+  return allDone;
 }
 
 - (void)didReceiveMemoryWarning
