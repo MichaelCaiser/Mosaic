@@ -8,10 +8,18 @@
 
 #import "MUserImageProvider.h"
 
+BOOL MKCoordinateRegionContainsCoordinate(MKCoordinateRegion region, CLLocationCoordinate2D coord) {
+  return (coord.latitude <= region.center.latitude + region.span.latitudeDelta &&
+          coord.latitude >= region.center.latitude - region.span.latitudeDelta) &&
+         (coord.longitude <= region.center.longitude + region.span.longitudeDelta &&
+          coord.longitude >= region.center.longitude - region.span.longitudeDelta);
+}
+
 @implementation MUserImageProvider
 
 - (void)imagesForRegion:(MKCoordinateRegion)region callback:(void (^)(NSArray *images))callback; {
   __block NSUInteger totalAssets = 0;
+  __block NSUInteger seenAssets = 0;
   NSMutableArray *xy =[[NSMutableArray alloc]init];
   NSMutableArray *assetURLDictionaries = [[NSMutableArray alloc] init];
   
@@ -28,17 +36,27 @@
         if(result != nil) {
           if([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
             [assetURLDictionaries addObject:[result valueForProperty:ALAssetPropertyURLs]];
-
-            NSURL *url= (NSURL*) [[result defaultRepresentation]url];
             
-            [library assetForURL:url
-                     resultBlock:^(ALAsset *asset) {
-                       [xy addObject:[UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]]];
-                       if ([xy count] == totalAssets) {
-                         callback(xy);
+            NSURL *url= (NSURL*) [[result defaultRepresentation]url];
+            // Only download the image if it is inside the region
+            CLLocation *imageLocation = [result valueForProperty:ALAssetPropertyLocation];
+            if (MKCoordinateRegionContainsCoordinate(region,[imageLocation coordinate])) {
+              [library assetForURL:url
+                       resultBlock:^(ALAsset *asset) {
+                         seenAssets++;
+                         [xy addObject:[UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]]];
+                         if (seenAssets == totalAssets) {
+                           callback(xy);
+                         }
                        }
-                     }
-                    failureBlock:^(NSError *error){ NSLog(@"test:Fail"); } ];
+                      failureBlock:^(NSError *error){ NSLog(@"test:Fail"); } ];
+            }
+            else {
+              seenAssets++;
+              if (seenAssets == totalAssets) {
+                callback(xy);
+              }
+            }
           }
         }
       }];

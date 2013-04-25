@@ -67,7 +67,7 @@
 }
 
 - (MKCoordinateRegion)regionForCoordinate:(CLLocationCoordinate2D)coordinate {
-  MKCoordinateSpan span = MKCoordinateSpanMake(10, 10);
+  MKCoordinateSpan span = MKCoordinateSpanMake(1, 1);
   return MKCoordinateRegionMake(coordinate, span);
 }
 
