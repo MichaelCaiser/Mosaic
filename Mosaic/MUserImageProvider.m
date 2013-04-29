@@ -36,20 +36,14 @@ BOOL MKCoordinateRegionContainsCoordinate(MKCoordinateRegion region, CLLocationC
         if(result != nil) {
           if([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
             [assetURLDictionaries addObject:[result valueForProperty:ALAssetPropertyURLs]];
-            
-            NSURL *url= (NSURL*) [[result defaultRepresentation]url];
             // Only download the image if it is inside the region
             CLLocation *imageLocation = [result valueForProperty:ALAssetPropertyLocation];
             if (MKCoordinateRegionContainsCoordinate(region,[imageLocation coordinate])) {
-              [library assetForURL:url
-                       resultBlock:^(ALAsset *asset) {
-                         seenAssets++;
-                         [xy addObject:[UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]]];
-                         if (seenAssets == totalAssets) {
-                           callback(xy);
-                         }
-                       }
-                      failureBlock:^(NSError *error){ NSLog(@"test:Fail"); } ];
+              seenAssets++;
+              [xy addObject:[UIImage imageWithCGImage:[[result defaultRepresentation] fullScreenImage]]];
+              if (seenAssets == totalAssets) {
+                callback(xy);
+              }
             }
             else {
               seenAssets++;
