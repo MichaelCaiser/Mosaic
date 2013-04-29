@@ -57,10 +57,11 @@
 
 - (void)_createImageViews {
   _markerViews = [NSMutableArray arrayWithCapacity:[_images count]];
-  for (UIImage *image in _images) {
-    // TODO(srice): Create the view;
+  for (NSUInteger i = 0; i < [_images count]; i++) {
+    UIImage *image = [_images objectAtIndex:i];
     MMarkerView *current = [[MMarkerView alloc] init];
     [current setImage:image];
+    [current setUpsideDown:!(i % 2)];
     [_markerViews addObject:current];
     [self addSubview:current];
   }

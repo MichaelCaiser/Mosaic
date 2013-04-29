@@ -32,6 +32,12 @@
   [self setNeedsDisplay];
 }
 
+- (void)setUpsideDown:(BOOL)upsideDown {
+  if (upsideDown == _upsideDown) return;
+  _upsideDown = upsideDown;
+  [self setNeedsDisplay];
+}
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
@@ -40,16 +46,9 @@
   [self drawScaledImage];
 }
 
-- (UIBezierPath *)markerPath {
-  UIBezierPath *path = [UIBezierPath bezierPath];
-  [path moveToPoint:[self pointForTip]];
-  [path addLineToPoint:[self curvePointForSide:NSLayoutAttributeLeft]];
-  [path addArcWithCenter:self.arcCenter radius:self.arcRadius startAngle:M_PI endAngle:0 clockwise:NO];
-  [path addLineToPoint:[self pointForTip]];
-  return path;
-}
-
 #pragma mark Private Methods
+
+#pragma mark -Image Related Methods
 
 /*/
  *
@@ -60,7 +59,6 @@
 - (void)drawScaledImage {
   UIImage *scaled = [self scaledImage];
   CGPoint drawPoint = [self drawPointForImage:scaled centeredInside:[self bounds]];
-  NSLog(@"%@",NSStringFromCGPoint(drawPoint));
   [scaled drawAtPoint:drawPoint];
 }
 
@@ -86,15 +84,33 @@
   }
 }
 
+#pragma mark -Clipping Related Methods
+
+- (UIBezierPath *)markerPath {
+  UIBezierPath *path = [UIBezierPath bezierPath];
+  [path moveToPoint:[self pointForTip]];
+  [path addLineToPoint:[self curvePointForSide:NSLayoutAttributeLeft]];
+  // When it is upside down, it should go clockwise. Otherwise, it should go counterclockwise
+  [path addArcWithCenter:self.arcCenter radius:self.arcRadius startAngle:M_PI endAngle:0 clockwise:_upsideDown];
+  [path addLineToPoint:[self pointForTip]];
+  return path;
+}
+
 - (CGPoint)pointForTip {
   // The tip should be at y value at kPadding, and x value in the middle of the view
-  return CGPointMake(self.width / 2, kPadding);
+  if (!_upsideDown)
+    return CGPointMake(self.width / 2, kPadding);
+  else
+    return CGPointMake(self.width / 2, self.height - kPadding);
 }
 
 - (CGPoint)arcCenter {
   // The center of the arc should be in the middle of the frame, and at a height
   // Where the edge of the arc would be at kPadding.
-  return CGPointMake(self.width / 2, self.height - kPadding - self.arcRadius);
+  if (!_upsideDown)
+    return CGPointMake(self.width / 2, self.height - kPadding - self.arcRadius);
+  else
+    return CGPointMake(self.width / 2, kPadding + self.arcRadius);
 }
 
 - (CGFloat)arcRadius {
