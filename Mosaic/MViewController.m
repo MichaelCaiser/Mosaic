@@ -24,8 +24,8 @@
 - (void)loadImages {
   MKCoordinateRegion region = [self regionForCoordinate:CLLocationCoordinate2DMake(10, 10)];
   NSArray *providers = @[
-                         [[MUserImageProvider alloc] init]
-//                         [[MFlickrImageProvider alloc] init]
+                         [[MUserImageProvider alloc] init],
+                         [[MFlickrImageProvider alloc] init]
                          ];
   NSMutableArray *providerFinished = [NSMutableArray arrayWithCapacity:[providers count]];
   for (NSUInteger i = 0 ; i < [providers count] ; i++) {

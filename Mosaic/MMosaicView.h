@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MMosaicView : UIView {
-  NSMutableArray *_imageViews;
+  NSMutableArray *_markerViews;
 }
 
 - (id)initWithImages:(NSArray *)images;

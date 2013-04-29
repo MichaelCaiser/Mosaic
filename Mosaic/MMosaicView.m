@@ -9,6 +9,7 @@
 //
 
 #import "MMosaicView.h"
+#import "MMarkerView.h"
 
 @implementation MMosaicView
 
@@ -25,6 +26,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+      [self setBackgroundColor:[UIColor grayColor]];
     }
     return self;
 }
@@ -38,6 +40,10 @@
 
 - (void)layoutSubviews {
   // TODO: Lay out the images in a mosaic pattern
+  for (NSUInteger i = 0; i < [_markerViews count]; i++) {
+    MMarkerView *current = [_markerViews objectAtIndex:i];
+    [current setFrameOrigin:CGPointMake((self.width / 2) - (current.width / 2), (i * current.height) + ((i + 1) * 5))];
+  }
 }
 
 /*
@@ -50,9 +56,13 @@
 */
 
 - (void)_createImageViews {
-  _imageViews = [NSMutableArray arrayWithCapacity:[_images count]];
+  _markerViews = [NSMutableArray arrayWithCapacity:[_images count]];
   for (UIImage *image in _images) {
     // TODO(srice): Create the view;
+    MMarkerView *current = [[MMarkerView alloc] init];
+    [current setImage:image];
+    [_markerViews addObject:current];
+    [self addSubview:current];
   }
 }
 

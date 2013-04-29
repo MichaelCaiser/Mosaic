@@ -24,6 +24,8 @@
 		E64BB8E817247CD70076675B /* MUserImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8E717247CD70076675B /* MUserImageProvider.m */; };
 		E64BB8EB17247CE60076675B /* MFlickrImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8EA17247CE60076675B /* MFlickrImageProvider.m */; };
 		E64BB8EE17247E080076675B /* MMosaicView.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8ED17247E080076675B /* MMosaicView.m */; };
+		E6D141E7172F147900724ADB /* MMarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D141E6172F147900724ADB /* MMarkerView.m */; };
+		E6D141ED172F1C9E00724ADB /* UIView+FrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D141EC172F1C9E00724ADB /* UIView+FrameAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,10 @@
 		E64BB8EA17247CE60076675B /* MFlickrImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFlickrImageProvider.m; sourceTree = "<group>"; };
 		E64BB8EC17247E080076675B /* MMosaicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMosaicView.h; sourceTree = "<group>"; };
 		E64BB8ED17247E080076675B /* MMosaicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMosaicView.m; sourceTree = "<group>"; };
+		E6D141E5172F147900724ADB /* MMarkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMarkerView.h; sourceTree = "<group>"; };
+		E6D141E6172F147900724ADB /* MMarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMarkerView.m; sourceTree = "<group>"; };
+		E6D141EB172F1C9E00724ADB /* UIView+FrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameAdditions.h"; sourceTree = "<group>"; };
+		E6D141EC172F1C9E00724ADB /* UIView+FrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,8 +160,12 @@
 		E64BB8DF17247C190076675B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E6D141EB172F1C9E00724ADB /* UIView+FrameAdditions.h */,
+				E6D141EC172F1C9E00724ADB /* UIView+FrameAdditions.m */,
 				E64BB8EC17247E080076675B /* MMosaicView.h */,
 				E64BB8ED17247E080076675B /* MMosaicView.m */,
+				E6D141E5172F147900724ADB /* MMarkerView.h */,
+				E6D141E6172F147900724ADB /* MMarkerView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -233,6 +243,8 @@
 				E64BB8E817247CD70076675B /* MUserImageProvider.m in Sources */,
 				E64BB8EB17247CE60076675B /* MFlickrImageProvider.m in Sources */,
 				E64BB8EE17247E080076675B /* MMosaicView.m in Sources */,
+				E6D141E7172F147900724ADB /* MMarkerView.m in Sources */,
+				E6D141ED172F1C9E00724ADB /* UIView+FrameAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +367,7 @@
 				E64BB8DB1724770F0076675B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
