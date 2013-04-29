@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "MImageProvider.h"
+#import "SBJson.h"
 
-@interface MFlickrImageProvider : NSObject <MImageProvider>
+@interface MFlickrImageProvider : NSObject <MImageProvider> {
+}
+
 
 @end

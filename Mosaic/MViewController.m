@@ -22,7 +22,9 @@
 }
 
 - (void)loadImages {
-  MKCoordinateRegion region = [self regionForCoordinate:CLLocationCoordinate2DMake(10, 10)];
+  MKCoordinateRegion region = [self regionForCoordinate:CLLocationCoordinate2DMake(40.116304, -88.243519)];
+  MFlickrImageProvider *test = [[MFlickrImageProvider alloc] init];
+  [test imagesForRegion:region callback:nil];
   NSArray *providers = @[
                          [[MUserImageProvider alloc] init],
                          [[MFlickrImageProvider alloc] init]
