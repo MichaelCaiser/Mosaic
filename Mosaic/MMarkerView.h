@@ -10,6 +10,7 @@
 
 @interface MMarkerView : UIView
 
+@property(nonatomic)BOOL upsideDown;
 @property(nonatomic,strong)UIImage *image;
 
 @end
