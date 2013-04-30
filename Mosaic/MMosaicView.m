@@ -40,8 +40,25 @@
 - (void)layoutSubviews {
   // TODO: Lay out the images in a mosaic pattern
   for (NSUInteger i = 0; i < [_markerViews count]; i++) {
+    NSUInteger group = ((5 * (i/5)) + 5) / 5;
+    NSUInteger val = i % 5;
+    //NSUInteger iter = [_markerViews count] / i;
     MMarkerView *current = [_markerViews objectAtIndex:i];
-    [current setFrameOrigin:CGPointMake((self.width / 2) - (current.width / 2), (i * current.height) + ((i + 1) * 5))];
+    NSUInteger x = 0;
+    NSUInteger y = 0;
+    
+    if (val <= 1) {
+      x = (self.width/2) - (val * current.width);
+      y = (group-1)* (current.height + (current.height/2));
+      [current setUpsideDown:YES];
+    }
+    else if (val >= 2) {
+      NSLog(@"%f", current.height);
+      x = self.width - ((val - 1) * current.width) - 10;
+      y = (group * current.height) - 40 + (group-1)*(current.height/2);
+    }
+    
+    [current setFrameOrigin:CGPointMake(x,y)];
   }
 }
 
@@ -60,7 +77,6 @@
     UIImage *image = [_images objectAtIndex:i];
     MMarkerView *current = [[MMarkerView alloc] init];
     [current setImage:image];
-//    [current setUpsideDown:!(i % 2)];
     [_markerViews addObject:current];
     [self addSubview:current];
   }

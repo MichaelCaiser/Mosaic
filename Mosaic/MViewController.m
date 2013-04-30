@@ -34,7 +34,7 @@ typedef enum {
   [self setLoadingPhase:MLoadingPhaseRetrieveImages];
   MKCoordinateRegion region = [self regionForCoordinate:CLLocationCoordinate2DMake(40.116304, -88.243519)];
   NSArray *providers = @[
-                         [[MUserImageProvider alloc] init],
+                         //[[MUserImageProvider alloc] init],
                          [[MFlickrImageProvider alloc] init]
                          ];
   NSMutableArray *providerFinished = [NSMutableArray arrayWithCapacity:[providers count]];
