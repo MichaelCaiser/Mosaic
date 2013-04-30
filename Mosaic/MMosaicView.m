@@ -55,7 +55,7 @@
     else if (val >= 2) {
       NSLog(@"%f", current.height);
       x = self.width - ((val - 1) * current.width) - 10;
-      y = (group * current.height) - 40 + (group-1)*(current.height/2);
+      y = (group * current.height) - 47 + (group-1)*(current.height/2);
     }
     
     [current setFrameOrigin:CGPointMake(x,y)];
