@@ -24,10 +24,13 @@ typedef enum {
 
 - (void)viewDidLoad
 {
-  NSLog(@"viewDidLoad");
   [super viewDidLoad];
   [[self view] setBackgroundColor:[UIColor blackColor]];
   [[self view] setFrame:[[UIScreen mainScreen] bounds]];
+  _image_queue = dispatch_queue_create("image_queue", NULL);
+  
+  _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+  [[self view] addSubview:_scrollView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -55,31 +58,34 @@ typedef enum {
 
 - (void)loadImages {
   [self setLoadingPhase:MLoadingPhaseRetrieveImages];
-  MKCoordinateRegion region = [self regionForCoordinate:_location];
-  NSArray *providers = @[
-                         [[MUserImageProvider alloc] init],
-                         [[MFlickrImageProvider alloc] init]
-                         ];
-  NSMutableArray *providerFinished = [NSMutableArray arrayWithCapacity:[providers count]];
-  for (NSUInteger i = 0 ; i < [providers count] ; i++) {
-    [providerFinished addObject:@NO];
-  }
-  NSMutableArray *totalImages = [NSMutableArray arrayWithCapacity:30];
-  for (NSUInteger i = 0 ; i < [providers count] ; i++) {
-    NSObject<MImageProvider> *provider = [providers objectAtIndex:i];
-    [provider imagesForRegion:region callback:^(NSArray *images) {
-      [totalImages addObjectsFromArray:images];
-      [providerFinished replaceObjectAtIndex:i withObject:@YES];
-      if ([self allProvidersFinished:providerFinished]) {
-        _images = totalImages;
-        [self createMosaicForRegion:region];
-      }
-    }];
-  }
+  dispatch_async(_image_queue, ^{
+    MKCoordinateRegion region = [self regionForCoordinate:_location];
+    NSArray *providers = @[
+                           [[MUserImageProvider alloc] init],
+                           [[MFlickrImageProvider alloc] init]
+                           ];
+    NSMutableArray *providerFinished = [NSMutableArray arrayWithCapacity:[providers count]];
+    for (NSUInteger i = 0 ; i < [providers count] ; i++) {
+      [providerFinished addObject:@NO];
+    }
+    NSMutableArray *totalImages = [NSMutableArray arrayWithCapacity:30];
+    for (NSUInteger i = 0 ; i < [providers count] ; i++) {
+      NSObject<MImageProvider> *provider = [providers objectAtIndex:i];
+      [provider imagesForRegion:region callback:^(NSArray *images) {
+        [totalImages addObjectsFromArray:images];
+        [providerFinished replaceObjectAtIndex:i withObject:@YES];
+        if ([self allProvidersFinished:providerFinished]) {
+          _images = totalImages;
+          dispatch_async(dispatch_get_main_queue(), ^{
+            [self createMosaicForRegion:region];
+          });
+        }
+      }];
+    }
+  });
 }
 
 - (void)createMosaicForRegion:(MKCoordinateRegion)region {
-  [self setLoadingPhase:MLoadingPhaseDone];
   NSLog(@"Images: %@",_images);
   
   NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false&bounds=%f,%f|%f,%f", region.center.latitude, region.center.longitude, region.center.latitude, region.center.longitude, region.center.latitude, region.center.longitude];
@@ -101,6 +107,8 @@ typedef enum {
     }
   }
 
+  [self setLoadingPhase:MLoadingPhaseDone];
+
   
   _mosaic = [[MMosaicView alloc] initWithImages:_images];
   [_mosaic setFrame:CGRectMake(0, kLabelHeight, self.view.width, self.view.height - kLabelHeight)];
@@ -113,8 +121,12 @@ typedef enum {
   [_locationLabel setTextAlignment:NSTextAlignmentCenter];
   [_locationLabel setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:20.0]];
   
-  [[self view] addSubview:_mosaic];
-  [[self view] addSubview:_locationLabel];
+  [_scrollView addSubview:_mosaic];
+  [_scrollView addSubview:_locationLabel];
+  
+  // I know I'm not supposed to do this, but screw it...
+  [_mosaic layoutSubviews];
+  [_scrollView setContentSize:CGSizeMake(self.view.width, [_mosaic contentHeight] + _mosaic.y + 20)];
 }
 
 - (BOOL)allProvidersFinished:(NSArray *)providerFinished {

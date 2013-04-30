@@ -19,6 +19,7 @@
   UILabel *_loadingLabel;
   
   // Main Views
+  UIScrollView *_scrollView;
   UILabel *_locationLabel;
   MMosaicView *_mosaic;
   NSArray *_images;
@@ -26,6 +27,8 @@
   // Data
   CLLocationManager *_locationManager;
   CLLocationCoordinate2D _location;
+  
+  dispatch_queue_t _image_queue;
 }
 
 @end
