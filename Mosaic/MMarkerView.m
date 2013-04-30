@@ -8,12 +8,15 @@
 
 #import "MMarkerView.h"
 
+#define D2R(degrees) ((M_PI * degrees)/ 180)
+
 #define kPadding 5
+#define kAngle D2R(45)
 
 @implementation MMarkerView
 
 - (id)init {
-  return [self initWithFrame:CGRectMake(0, 0, 100, 140)];
+  return [self initWithFrame:CGRectMake(0, 0, 100, 120)];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -69,7 +72,6 @@
 }
 
 - (UIImage *)scaledImage {
-//  return [self scaleImage:_image toSize:self.scaleSize];
   return [UIImage imageWithCGImage:_image.CGImage scale:self.scaleFactor orientation:_image.imageOrientation];
 }
 
@@ -89,9 +91,8 @@
 - (UIBezierPath *)markerPath {
   UIBezierPath *path = [UIBezierPath bezierPath];
   [path moveToPoint:[self pointForTip]];
-  [path addLineToPoint:[self curvePointForSide:NSLayoutAttributeLeft]];
   // When it is upside down, it should go clockwise. Otherwise, it should go counterclockwise
-  [path addArcWithCenter:self.arcCenter radius:self.arcRadius startAngle:M_PI endAngle:0 clockwise:_upsideDown];
+  [path addArcWithCenter:self.arcCenter radius:self.arcRadius startAngle:M_PI + kAngle endAngle:(2*M_PI) - kAngle clockwise:_upsideDown];
   [path addLineToPoint:[self pointForTip]];
   return path;
 }
@@ -123,13 +124,14 @@
 
 - (CGPoint)curvePointForSide:(NSLayoutAttribute)side {
   // The curve point should begin at the y value of the arcCenter
+  CGFloat deltax = self.markerWidth * cos(kAngle);
+  CGFloat deltay = self.markerWidth * sin(kAngle);
+  NSLog(@"%f,%f",deltax,deltay);
   if (side == NSLayoutAttributeLeft) {
-    return CGPointMake(kPadding, self.arcCenter.y);
+      return CGPointMake(kPadding + (self.markerWidth - deltax), self.arcCenter.y - deltay);
   }
-  if (side == NSLayoutAttributeRight) {
-    return CGPointMake(kPadding + self.markerWidth, self.arcCenter.y);
-  }
-  return CGPointZero;
+  NSLog(@"TODO: DONT SCREW THIS UP");
+  return CGPointMake(kPadding, self.arcCenter.y - deltay);
 }
 
 #pragma mark Code taken from the internet

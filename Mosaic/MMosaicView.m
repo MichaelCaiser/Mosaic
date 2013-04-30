@@ -61,7 +61,7 @@
     UIImage *image = [_images objectAtIndex:i];
     MMarkerView *current = [[MMarkerView alloc] init];
     [current setImage:image];
-    [current setUpsideDown:!(i % 2)];
+//    [current setUpsideDown:!(i % 2)];
     [_markerViews addObject:current];
     [self addSubview:current];
   }
