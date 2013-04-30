@@ -53,7 +53,6 @@
       [current setUpsideDown:YES];
     }
     else if (val >= 2) {
-      NSLog(@"%f", current.height);
       x = self.width - ((val - 1) * current.width) - 10;
       y = (group * current.height) - 47 + (group-1)*(current.height/2);
     }
@@ -84,7 +83,6 @@
 
 - (CGFloat)contentHeight {
   CGFloat max = 0;
-  NSLog(@"%@",_markerViews);
   for (MMarkerView *current in _markerViews) {
     CGFloat heightRequired = current.y + current.height;
     if (heightRequired > max) {

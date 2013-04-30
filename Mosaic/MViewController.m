@@ -24,7 +24,6 @@ typedef enum {
 
 - (void)viewDidLoad
 {
-  NSLog(@"viewDidLoad");
   [super viewDidLoad];
   [[self view] setBackgroundColor:[UIColor blackColor]];
   [[self view] setFrame:[[UIScreen mainScreen] bounds]];

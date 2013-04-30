@@ -127,18 +127,6 @@
   return self.width - (2 * kPadding);
 }
 
-- (CGPoint)curvePointForSide:(NSLayoutAttribute)side {
-  // The curve point should begin at the y value of the arcCenter
-  CGFloat deltax = self.markerWidth * cos(kAngle);
-  CGFloat deltay = self.markerWidth * sin(kAngle);
-  NSLog(@"%f,%f",deltax,deltay);
-  if (side == NSLayoutAttributeLeft) {
-      return CGPointMake(kPadding + (self.markerWidth - deltax), self.arcCenter.y - deltay);
-  }
-  NSLog(@"TODO: DONT SCREW THIS UP");
-  return CGPointMake(kPadding, self.arcCenter.y - deltay);
-}
-
 #pragma mark Code taken from the internet
 
 /*/
