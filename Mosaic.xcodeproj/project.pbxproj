@@ -36,6 +36,8 @@
 		E64BB8EE17247E080076675B /* MMosaicView.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8ED17247E080076675B /* MMosaicView.m */; };
 		E6D141E7172F147900724ADB /* MMarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D141E6172F147900724ADB /* MMarkerView.m */; };
 		E6D141ED172F1C9E00724ADB /* UIView+FrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D141EC172F1C9E00724ADB /* UIView+FrameAdditions.m */; };
+		E6F6534C172F8F8000890A45 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E6F6534A172F8F8000890A45 /* icon.png */; };
+		E6F6534D172F8F8000890A45 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6F6534B172F8F8000890A45 /* icon@2x.png */; };
 		E6F99365172F7BA1002279AD /* libdispatch.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F99363172F7B96002279AD /* libdispatch.dylib */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +93,8 @@
 		E6D141E6172F147900724ADB /* MMarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMarkerView.m; sourceTree = "<group>"; };
 		E6D141EB172F1C9E00724ADB /* UIView+FrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameAdditions.h"; sourceTree = "<group>"; };
 		E6D141EC172F1C9E00724ADB /* UIView+FrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameAdditions.m"; sourceTree = "<group>"; };
+		E6F6534A172F8F8000890A45 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = SOURCE_ROOT; };
+		E6F6534B172F8F8000890A45 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		E6F99363172F7B96002279AD /* libdispatch.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdispatch.dylib; path = usr/lib/system/libdispatch.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -196,6 +200,8 @@
 		E64BB8C01724770F0076675B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E6F6534A172F8F8000890A45 /* icon.png */,
+				E6F6534B172F8F8000890A45 /* icon@2x.png */,
 				E64BB8D41724770F0076675B /* MViewController.xib */,
 				E64BB8C11724770F0076675B /* Mosaic-Info.plist */,
 				E64BB8C21724770F0076675B /* InfoPlist.strings */,
@@ -299,6 +305,8 @@
 				E64BB8CE1724770F0076675B /* Default@2x.png in Resources */,
 				E64BB8D01724770F0076675B /* Default-568h@2x.png in Resources */,
 				E64BB8D61724770F0076675B /* MViewController.xib in Resources */,
+				E6F6534C172F8F8000890A45 /* icon.png in Resources */,
+				E6F6534D172F8F8000890A45 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
