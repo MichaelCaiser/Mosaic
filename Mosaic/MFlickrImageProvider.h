@@ -13,5 +13,4 @@
 @interface MFlickrImageProvider : NSObject <MImageProvider> {
 }
 
-
 @end

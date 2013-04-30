@@ -49,22 +49,36 @@ typedef enum {
       [providerFinished replaceObjectAtIndex:i withObject:@YES];
       if ([self allProvidersFinished:providerFinished]) {
         _images = totalImages;
-        [self createMosaic];
+        [self createMosaicForRegion:region];
       }
     }];
   }
 }
 
-- (void)createMosaic {
+- (void)createMosaicForRegion:(MKCoordinateRegion)region {
   [self setLoadingPhase:MLoadingPhaseDone];
   NSLog(@"Images: %@",_images);
   
+  NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=9ac99419d1e4d4c101e0f10339bdc84a&lat=%f&lon=%f&accuracy=11&format=rest&auth_token=72157633368979707-92f9b1829813902a&api_sig=ed298e89ffba270ca4e91f4fed45ac33", region.center.latitude, region.center.longitude];
+  NSURL *url = [NSURL URLWithString:urlString];
+  
+  NSString *xmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+  
+  NSRange range = [xmlString rangeOfString:@"name=\""];
+  NSString *substring = [[xmlString substringFromIndex:NSMaxRange(range)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  
+  range = [substring rangeOfString:@"\""];
+  substring = [[substring substringToIndex:NSMaxRange(range)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  
+  NSArray *cityAndState = [substring componentsSeparatedByString:@","];
+  NSString *location = [NSString stringWithFormat:@"%@, %@", [cityAndState objectAtIndex:0], [cityAndState objectAtIndex:1]];
+  
   _mosaic = [[MMosaicView alloc] initWithImages:_images];
   [_mosaic setFrame:CGRectMake(0, kLabelHeight, self.view.width, self.view.height - kLabelHeight)];
-  
+
   _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width, kLabelHeight)];
   [_locationLabel setCenterX:[[self view] centerX]];
-  [_locationLabel setText:@"Urbana, IL"];
+  [_locationLabel setText:location];
   [_locationLabel setBackgroundColor:[UIColor clearColor]];
   [_locationLabel setTextColor:[UIColor whiteColor]];
   [_locationLabel setTextAlignment:NSTextAlignmentCenter];
