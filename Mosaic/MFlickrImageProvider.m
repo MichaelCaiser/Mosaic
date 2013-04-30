@@ -29,7 +29,7 @@ NSString *const flickrSecret = @"941343a35691dc97";
     
     [photoNames addObject:(title.length > 0 ? title : @"Untitled")];
     // 3.b Construct URL for e/ photo.
-    NSString *photoURLString = [NSString stringWithFormat:@"http://farm%@.static.flickr.com/%@/%@_%@_s.jpg", [photo objectForKey:@"farm"], [photo objectForKey:@"server"], [photo objectForKey:@"id"], [photo objectForKey:@"secret"]];
+    NSString *photoURLString = [NSString stringWithFormat:@"http://farm%@.static.flickr.com/%@/%@_%@_m.jpg", [photo objectForKey:@"farm"], [photo objectForKey:@"server"], [photo objectForKey:@"id"], [photo objectForKey:@"secret"]];
     [photoURLs addObject:[NSURL URLWithString:photoURLString]];
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:photoURLString]];
     UIImage *image = [UIImage imageWithData:imageData];
