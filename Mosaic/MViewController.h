@@ -26,6 +26,8 @@
   // Data
   CLLocationManager *_locationManager;
   CLLocationCoordinate2D _location;
+  
+  dispatch_queue_t _image_queue;
 }
 
 @end

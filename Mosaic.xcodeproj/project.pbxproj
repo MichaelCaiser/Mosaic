@@ -36,6 +36,7 @@
 		E64BB8EE17247E080076675B /* MMosaicView.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BB8ED17247E080076675B /* MMosaicView.m */; };
 		E6D141E7172F147900724ADB /* MMarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D141E6172F147900724ADB /* MMarkerView.m */; };
 		E6D141ED172F1C9E00724ADB /* UIView+FrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D141EC172F1C9E00724ADB /* UIView+FrameAdditions.m */; };
+		E6F99365172F7BA1002279AD /* libdispatch.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F99363172F7B96002279AD /* libdispatch.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		E6D141E6172F147900724ADB /* MMarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMarkerView.m; sourceTree = "<group>"; };
 		E6D141EB172F1C9E00724ADB /* UIView+FrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameAdditions.h"; sourceTree = "<group>"; };
 		E6D141EC172F1C9E00724ADB /* UIView+FrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameAdditions.m"; sourceTree = "<group>"; };
+		E6F99363172F7B96002279AD /* libdispatch.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdispatch.dylib; path = usr/lib/system/libdispatch.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6F99365172F7BA1002279AD /* libdispatch.dylib in Frameworks */,
 				E64BB8E317247C520076675B /* CoreLocation.framework in Frameworks */,
 				E64BB8E517247CA00076675B /* MapKit.framework in Frameworks */,
 				E64BB8BA1724770E0076675B /* UIKit.framework in Frameworks */,
@@ -165,6 +168,7 @@
 		E64BB8B81724770E0076675B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E6F99363172F7B96002279AD /* libdispatch.dylib */,
 				E64BB8E417247CA00076675B /* MapKit.framework */,
 				E64BB8E217247C520076675B /* CoreLocation.framework */,
 				E64BB8E017247C4B0076675B /* AssetsLibrary.framework */,
@@ -410,6 +414,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mosaic/Mosaic-Prefix.pch";
 				INFOPLIST_FILE = "Mosaic/Mosaic-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -421,6 +429,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mosaic/Mosaic-Prefix.pch";
 				INFOPLIST_FILE = "Mosaic/Mosaic-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

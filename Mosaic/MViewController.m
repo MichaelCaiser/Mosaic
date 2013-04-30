@@ -28,6 +28,7 @@ typedef enum {
   [super viewDidLoad];
   [[self view] setBackgroundColor:[UIColor blackColor]];
   [[self view] setFrame:[[UIScreen mainScreen] bounds]];
+  _image_queue = dispatch_queue_create("image_queue", NULL);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -55,31 +56,34 @@ typedef enum {
 
 - (void)loadImages {
   [self setLoadingPhase:MLoadingPhaseRetrieveImages];
-  MKCoordinateRegion region = [self regionForCoordinate:_location];
-  NSArray *providers = @[
-                         [[MUserImageProvider alloc] init],
-                         [[MFlickrImageProvider alloc] init]
-                         ];
-  NSMutableArray *providerFinished = [NSMutableArray arrayWithCapacity:[providers count]];
-  for (NSUInteger i = 0 ; i < [providers count] ; i++) {
-    [providerFinished addObject:@NO];
-  }
-  NSMutableArray *totalImages = [NSMutableArray arrayWithCapacity:30];
-  for (NSUInteger i = 0 ; i < [providers count] ; i++) {
-    NSObject<MImageProvider> *provider = [providers objectAtIndex:i];
-    [provider imagesForRegion:region callback:^(NSArray *images) {
-      [totalImages addObjectsFromArray:images];
-      [providerFinished replaceObjectAtIndex:i withObject:@YES];
-      if ([self allProvidersFinished:providerFinished]) {
-        _images = totalImages;
-        [self createMosaicForRegion:region];
-      }
-    }];
-  }
+  dispatch_async(_image_queue, ^{
+    MKCoordinateRegion region = [self regionForCoordinate:_location];
+    NSArray *providers = @[
+                           [[MUserImageProvider alloc] init],
+                           [[MFlickrImageProvider alloc] init]
+                           ];
+    NSMutableArray *providerFinished = [NSMutableArray arrayWithCapacity:[providers count]];
+    for (NSUInteger i = 0 ; i < [providers count] ; i++) {
+      [providerFinished addObject:@NO];
+    }
+    NSMutableArray *totalImages = [NSMutableArray arrayWithCapacity:30];
+    for (NSUInteger i = 0 ; i < [providers count] ; i++) {
+      NSObject<MImageProvider> *provider = [providers objectAtIndex:i];
+      [provider imagesForRegion:region callback:^(NSArray *images) {
+        [totalImages addObjectsFromArray:images];
+        [providerFinished replaceObjectAtIndex:i withObject:@YES];
+        if ([self allProvidersFinished:providerFinished]) {
+          _images = totalImages;
+          dispatch_async(dispatch_get_main_queue(), ^{
+            [self createMosaicForRegion:region];
+          });
+        }
+      }];
+    }
+  });
 }
 
 - (void)createMosaicForRegion:(MKCoordinateRegion)region {
-  [self setLoadingPhase:MLoadingPhaseDone];
   NSLog(@"Images: %@",_images);
   
   NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=9ac99419d1e4d4c101e0f10339bdc84a&lat=%f&lon=%f&accuracy=11&format=rest&auth_token=72157633368979707-92f9b1829813902a&api_sig=ed298e89ffba270ca4e91f4fed45ac33", region.center.latitude, region.center.longitude];
@@ -95,6 +99,8 @@ typedef enum {
   
   NSArray *cityAndState = [substring componentsSeparatedByString:@","];
   NSString *location = [NSString stringWithFormat:@"%@, %@", [cityAndState objectAtIndex:0], [cityAndState objectAtIndex:1]];
+  
+  [self setLoadingPhase:MLoadingPhaseDone];
   
   _mosaic = [[MMosaicView alloc] initWithImages:_images];
   [_mosaic setFrame:CGRectMake(0, kLabelHeight, self.view.width, self.view.height - kLabelHeight)];
