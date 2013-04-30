@@ -92,7 +92,12 @@
   UIBezierPath *path = [UIBezierPath bezierPath];
   [path moveToPoint:[self pointForTip]];
   // When it is upside down, it should go clockwise. Otherwise, it should go counterclockwise
-  [path addArcWithCenter:self.arcCenter radius:self.arcRadius startAngle:M_PI + kAngle endAngle:(2*M_PI) - kAngle clockwise:_upsideDown];
+  if (_upsideDown) {
+    [path addArcWithCenter:self.arcCenter radius:self.arcRadius startAngle:M_PI - kAngle endAngle:(2 * M_PI) + kAngle clockwise:YES];
+  }
+  else {
+    [path addArcWithCenter:self.arcCenter radius:self.arcRadius startAngle:M_PI + kAngle endAngle:(2 * M_PI) - kAngle clockwise:NO];
+  }
   [path addLineToPoint:[self pointForTip]];
   return path;
 }
