@@ -88,7 +88,7 @@ typedef enum {
 - (void)createMosaicForRegion:(MKCoordinateRegion)region {
   NSLog(@"Images: %@",_images);
   
-  NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false&bounds=%f,%f|%f,%f", region.center.latitude, region.center.longitude, region.center.latitude, region.center.longitude, region.center.latitude, region.center.longitude];
+  NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false", region.center.latitude, region.center.longitude];
   NSLog(@"%@", urlString);
   
   NSURL *url = [NSURL URLWithString:urlString];
