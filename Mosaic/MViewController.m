@@ -82,19 +82,25 @@ typedef enum {
   [self setLoadingPhase:MLoadingPhaseDone];
   NSLog(@"Images: %@",_images);
   
-  NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=9ac99419d1e4d4c101e0f10339bdc84a&lat=%f&lon=%f&accuracy=11&format=rest&auth_token=72157633368979707-92f9b1829813902a&api_sig=ed298e89ffba270ca4e91f4fed45ac33", region.center.latitude, region.center.longitude];
+  NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false&bounds=%f,%f|%f,%f", region.center.latitude, region.center.longitude, region.center.latitude, region.center.longitude, region.center.latitude, region.center.longitude];
+  NSLog(@"%@", urlString);
+  
   NSURL *url = [NSURL URLWithString:urlString];
   
-  NSString *xmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+  NSString *jsonString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
   
-  NSRange range = [xmlString rangeOfString:@"name=\""];
-  NSString *substring = [[xmlString substringFromIndex:NSMaxRange(range)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
+  NSDictionary *jsonObjects = [jsonParser objectWithString:jsonString];
+  NSArray *addresses = [jsonObjects objectForKey:@"results"];
   
-  range = [substring rangeOfString:@"\""];
-  substring = [[substring substringToIndex:NSMaxRange(range)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-  
-  NSArray *cityAndState = [substring componentsSeparatedByString:@","];
-  NSString *location = [NSString stringWithFormat:@"%@, %@", [cityAndState objectAtIndex:0], [cityAndState objectAtIndex:1]];
+  NSString *location = @"Champaign, IL";
+  NSLog(@"%@", addresses);
+  for (NSDictionary *address in addresses) {
+    if ([[address objectForKey:@"types"] containsObject:@"locality"] && [[address objectForKey:@"types"] containsObject:@"political"]) {
+      location = [address objectForKey:@"formatted_address"];
+    }
+  }
+
   
   _mosaic = [[MMosaicView alloc] initWithImages:_images];
   [_mosaic setFrame:CGRectMake(0, kLabelHeight, self.view.width, self.view.height - kLabelHeight)];
