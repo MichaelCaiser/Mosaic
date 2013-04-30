@@ -35,7 +35,6 @@ NSString *const flickrSecret = @"941343a35691dc97";
     UIImage *image = [UIImage imageWithData:imageData];
     [images addObject:image];
   }
-  NSLog(@"%@", images);
   callback(images);
 }
 

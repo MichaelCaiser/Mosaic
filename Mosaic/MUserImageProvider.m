@@ -18,8 +18,10 @@ BOOL MKCoordinateRegionContainsCoordinate(MKCoordinateRegion region, CLLocationC
 @implementation MUserImageProvider
 
 - (void)imagesForRegion:(MKCoordinateRegion)region callback:(void (^)(NSArray *images))callback; {
+  // I'm sorry for having written this method. Ugh.
   __block NSUInteger totalAssets = 0;
   __block NSUInteger seenAssets = 0;
+  __block BOOL callbackFired = NO;
   NSMutableArray *xy =[[NSMutableArray alloc]init];
   NSMutableArray *assetURLDictionaries = [[NSMutableArray alloc] init];
   
@@ -42,14 +44,28 @@ BOOL MKCoordinateRegionContainsCoordinate(MKCoordinateRegion region, CLLocationC
               seenAssets++;
               [xy addObject:[UIImage imageWithCGImage:[[result defaultRepresentation] fullScreenImage]]];
               if (seenAssets == totalAssets) {
-                callback(xy);
+                if (!callbackFired) {
+                  callbackFired = YES;
+                  callback(xy);
+                }
               }
             }
             else {
               seenAssets++;
               if (seenAssets == totalAssets) {
-                callback(xy);
+                if (!callbackFired) {
+                  callbackFired = YES;
+                  callback(xy);
+                }
               }
+            }
+          }
+        }
+        else {
+          if (seenAssets == totalAssets) {
+            if (!callbackFired) {
+              callbackFired = YES;
+              callback(xy);
             }
           }
         }
