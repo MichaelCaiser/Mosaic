@@ -30,4 +30,12 @@
 - (void)setHeight:(CGFloat)height;
 - (void)setFrameSize:(CGSize)size;
 
+// Getting Center
+- (CGFloat)centerX;
+- (CGFloat)centerY;
+
+// Setting Center
+- (void)setCenterX:(CGFloat)centerX;
+- (void)setCenterY:(CGFloat)centerY;
+
 @end

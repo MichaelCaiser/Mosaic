@@ -72,4 +72,24 @@
   [self setFrame:CGRectMake(origin.x, origin.y, size.width, size.height)];
 }
 
+#pragma mark Getting Center
+
+- (CGFloat)centerX {
+  return self.center.x;
+}
+
+- (CGFloat)centerY {
+  return self.center.y;
+}
+
+#pragma mark Setting Center
+
+- (void)setCenterX:(CGFloat)centerX {
+  [self setCenter:CGPointMake(centerX, self.centerY)];
+}
+
+- (void)setCenterY:(CGFloat)centerY {
+  [self setCenter:CGPointMake(self.centerX, centerY)];
+}
+
 @end

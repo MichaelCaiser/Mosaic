@@ -12,6 +12,12 @@
 #import "MFlickrImageProvider.h"
 
 @interface MViewController : UIViewController {
+  // Loading Views
+  UIActivityIndicatorView *_loadingView;
+  UILabel *_loadingLabel;
+  
+  // Main Views
+  UILabel *_locationLabel;
   MMosaicView *_mosaic;
   NSArray *_images;
 }
