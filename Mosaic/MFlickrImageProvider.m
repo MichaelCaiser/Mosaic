@@ -33,7 +33,7 @@ NSString *const flickrSecret = @"941343a35691dc97";
     [photoURLs addObject:[NSURL URLWithString:photoURLString]];
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:photoURLString]];
     UIImage *image = [UIImage imageWithData:imageData];
-    [images addObject:image];
+    [images addObject:[self convertImageToGrayScale:image]];
   }
   callback(images);
 }
@@ -41,9 +41,39 @@ NSString *const flickrSecret = @"941343a35691dc97";
 // Build the URL to hit
 // TODO: add in bbox support
 -(NSURL *)getFlickrURLForRegion:(MKCoordinateRegion)region {
-  NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&extras=geo&lat=%f&lon=%f&radius=5&min_taken_date=1335312000&per_page=20&format=json&nojsoncallback=1", flickrKey, region.center.latitude, region.center.longitude];
+  NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&extras=geo&lat=%f&lon=%f&radius=5&min_taken_date=1335312000&per_page=50&format=json&nojsoncallback=1", flickrKey, region.center.latitude, region.center.longitude];
   NSURL *url = [NSURL URLWithString:urlString];
   return url;
+}
+
+- (UIImage *)convertImageToGrayScale:(UIImage *)image
+{
+  // Create image rectangle with current image width/height
+  CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
+  
+  // Grayscale color space
+  CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+  
+  // Create bitmap content with current image size and grayscale colorspace
+  CGContextRef context = CGBitmapContextCreate(nil, image.size.width, image.size.height, 8, 0, colorSpace, kCGImageAlphaNone);
+  
+  // Draw image into current context, with specified rectangle
+  // using previously defined context (with grayscale colorspace)
+  CGContextDrawImage(context, imageRect, [image CGImage]);
+  
+  // Create bitmap image info from pixel data in current context
+  CGImageRef imageRef = CGBitmapContextCreateImage(context);
+  
+  // Create a new UIImage object
+  UIImage *newImage = [UIImage imageWithCGImage:imageRef];
+  
+  // Release colorspace, context and bitmap information
+  CGColorSpaceRelease(colorSpace);
+  CGContextRelease(context);
+  CFRelease(imageRef);
+  
+  // Return the new grayscale image
+  return newImage;
 }
 
 @end

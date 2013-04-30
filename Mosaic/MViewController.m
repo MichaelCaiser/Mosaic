@@ -34,8 +34,9 @@ typedef enum {
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  [self getCurrentLocation];
-//  [self loadImages];
+  //[self getCurrentLocation];
+  _location = CLLocationCoordinate2DMake(35.6984, 139.7722);
+  [self loadImages];
 }
 
 - (void)getCurrentLocation {
@@ -87,10 +88,9 @@ typedef enum {
 
 - (void)createMosaicForRegion:(MKCoordinateRegion)region {
   NSLog(@"Images: %@",_images);
-  
   NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false", region.center.latitude, region.center.longitude];
   NSLog(@"%@", urlString);
-  
+
   NSURL *url = [NSURL URLWithString:urlString];
   
   NSString *jsonString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
