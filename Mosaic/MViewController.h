@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+
 #import "MMosaicView.h"
 #import "MUserImageProvider.h"
 #import "MFlickrImageProvider.h"
 
-@interface MViewController : UIViewController {
+@interface MViewController : UIViewController <CLLocationManagerDelegate> {
   // Loading Views
   UIActivityIndicatorView *_loadingView;
   UILabel *_loadingLabel;
@@ -20,6 +22,10 @@
   UILabel *_locationLabel;
   MMosaicView *_mosaic;
   NSArray *_images;
+  
+  // Data
+  CLLocationManager *_locationManager;
+  CLLocationCoordinate2D _location;
 }
 
 @end
