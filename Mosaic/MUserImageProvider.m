@@ -9,6 +9,7 @@
 #import "MUserImageProvider.h"
 
 BOOL MKCoordinateRegionContainsCoordinate(MKCoordinateRegion region, CLLocationCoordinate2D coord) {
+  coord = CLLocationCoordinate2DMake(40.1164, -88.2433);
   return (coord.latitude <= region.center.latitude + region.span.latitudeDelta &&
           coord.latitude >= region.center.latitude - region.span.latitudeDelta) &&
          (coord.longitude <= region.center.longitude + region.span.longitudeDelta &&

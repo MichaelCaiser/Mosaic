@@ -34,9 +34,7 @@ typedef enum {
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  //[self getCurrentLocation];
-  _location = CLLocationCoordinate2DMake(35.6984, 139.7722);
-  [self loadImages];
+  [self getCurrentLocation];
 }
 
 - (void)getCurrentLocation {
@@ -87,10 +85,7 @@ typedef enum {
 }
 
 - (void)createMosaicForRegion:(MKCoordinateRegion)region {
-  NSLog(@"Images: %@",_images);
   NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false", region.center.latitude, region.center.longitude];
-  NSLog(@"%@", urlString);
-
   NSURL *url = [NSURL URLWithString:urlString];
   
   NSString *jsonString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
@@ -100,7 +95,6 @@ typedef enum {
   NSArray *addresses = [jsonObjects objectForKey:@"results"];
   
   NSString *location = @"Champaign, IL";
-  NSLog(@"%@", addresses);
   for (NSDictionary *address in addresses) {
     if ([[address objectForKey:@"types"] containsObject:@"locality"] && [[address objectForKey:@"types"] containsObject:@"political"]) {
       location = [address objectForKey:@"formatted_address"];
@@ -189,10 +183,16 @@ typedef enum {
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
   // After we have their location, we don't care about updating any more
-  [manager stopUpdatingLocation];
-  CLLocation *currentLocation = [locations lastObject];
-  _location = [currentLocation coordinate];
-  [self loadImages];
+  for (CLLocation *location in locations) {
+    NSTimeInterval age = [location.timestamp timeIntervalSinceNow];
+    if(age > -5)
+    {
+      //Use location
+      [manager stopUpdatingLocation];
+      _location = [location coordinate];
+      [self loadImages];
+    }
+  }
 }
 
 @end
