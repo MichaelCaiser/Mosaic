@@ -19,6 +19,7 @@
   UILabel *_loadingLabel;
   
   // Main Views
+  UIScrollView *_scrollView;
   UILabel *_locationLabel;
   MMosaicView *_mosaic;
   NSArray *_images;

@@ -82,4 +82,16 @@
   }
 }
 
+- (CGFloat)contentHeight {
+  CGFloat max = 0;
+  NSLog(@"%@",_markerViews);
+  for (MMarkerView *current in _markerViews) {
+    CGFloat heightRequired = current.y + current.height;
+    if (heightRequired > max) {
+      max = heightRequired;
+    }
+  }
+  return max;
+}
+
 @end

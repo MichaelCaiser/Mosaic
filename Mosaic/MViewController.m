@@ -29,6 +29,9 @@ typedef enum {
   [[self view] setBackgroundColor:[UIColor blackColor]];
   [[self view] setFrame:[[UIScreen mainScreen] bounds]];
   _image_queue = dispatch_queue_create("image_queue", NULL);
+  
+  _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+  [[self view] addSubview:_scrollView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -99,7 +102,7 @@ typedef enum {
   
   NSArray *cityAndState = [substring componentsSeparatedByString:@","];
   NSString *location = [NSString stringWithFormat:@"%@, %@", [cityAndState objectAtIndex:0], [cityAndState objectAtIndex:1]];
-  
+
   [self setLoadingPhase:MLoadingPhaseDone];
   
   _mosaic = [[MMosaicView alloc] initWithImages:_images];
@@ -113,8 +116,12 @@ typedef enum {
   [_locationLabel setTextAlignment:NSTextAlignmentCenter];
   [_locationLabel setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:20.0]];
   
-  [[self view] addSubview:_mosaic];
-  [[self view] addSubview:_locationLabel];
+  [_scrollView addSubview:_mosaic];
+  [_scrollView addSubview:_locationLabel];
+  
+  // I know I'm not supposed to do this, but screw it...
+  [_mosaic layoutSubviews];
+  [_scrollView setContentSize:CGSizeMake(self.view.width, [_mosaic contentHeight] + _mosaic.y + 20)];
 }
 
 - (BOOL)allProvidersFinished:(NSArray *)providerFinished {

@@ -14,6 +14,8 @@
 
 - (id)initWithImages:(NSArray *)images;
 
+- (CGFloat)contentHeight;
+
 @property(nonatomic,strong)NSArray *images;
 
 @end
